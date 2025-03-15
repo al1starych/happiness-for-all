@@ -1,0 +1,201 @@
+/* Дополнительные стили для повышения производительности рендеринга */
+.container, .main-content, .panel {
+    will-change: transform;
+    transform: translateZ(0);
+}
+
+/* Стили для анимаций с GPU ускорением */
+.message, .concern-item, .happiness-score {
+    will-change: transform, opacity;
+    transform: translateZ(0);
+}
+
+/* Дополнительные стили для доступности */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* Фокус для клавиатурной навигации */
+:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+/* Улучшения для мобильных устройств */
+@media (max-width: 576px) {
+    .panel {
+        padding: 20px;
+    }
+    
+    .happiness-score {
+        font-size: 56px;
+    }
+    
+    .form-control, .chat-text, .calm-mode-text {
+        padding: 12px;
+    }
+    
+    .btn {
+        padding: 12px 20px;
+    }
+    
+    .message-bubble {
+        max-width: 85%;
+    }
+}
+
+/* Стили для печати */
+@media print {
+    .panel {
+        box-shadow: none;
+        border: 1px solid #ccc;
+    }
+    
+    .btn, .voice-btn, .calm-mode-btn, .theme-toggle {
+        display: none;
+    }
+    
+    body {
+        background: white;
+    }
+    
+    .container {
+        width: 100%;
+        max-width: 100%;
+    }
+    
+    .happiness-index {
+        break-inside: avoid;
+    }
+}
+
+/* Дополнительные улучшения для темной темы */
+[data-theme="dark"] .message-actions button {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+[data-theme="dark"] .message-actions button:hover {
+    color: rgba(255, 255, 255, 1);
+}
+
+/* Стили для анимации появления элементов */
+@keyframes slideInUp {
+    from {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.slide-in {
+    animation: slideInUp 0.5s ease-out forwards;
+}
+
+/* Плавные переходы между состояниями для всех интерактивных элементов */
+button, input, textarea, .concern-item, .panel, .message-bubble {
+    transition: all 0.3s ease;
+}
+
+/* Улучшенные стили для прелоадера */
+.preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--card-bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease, visibility 0.5s;
+}
+
+.preloader.fade-out {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.preloader-spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    border-top-color: var(--primary-color);
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+/* Добавьте или обновите эти стили в вашем CSS */
+.message-bubble p {
+    margin: 18px 0; /* Увеличиваем отступы между абзацами */
+}
+
+.message-bubble p:first-child {
+    margin-top: 0; /* Убираем лишний отступ сверху для первого абзаца */
+}
+
+.message-bubble p:last-child {
+    margin-bottom: 0; /* Убираем лишний отступ снизу для последнего абзаца */
+}
+
+/* Улучшаем отображение списков */
+.message-bubble ul, .message-bubble ol {
+    padding-left: 20px;
+    margin: 18px 0; /* Увеличиваем отступы вокруг списков */
+}
+
+.message-bubble li {
+    margin: 8px 0; /* Увеличиваем расстояние между элементами списка */
+    line-height: 1.5; /* Увеличиваем межстрочное расстояние */
+}
+
+/* Общее улучшение для читаемости */
+.message-bubble {
+    line-height: 1.6; /* Увеличиваем межстрочный интервал */
+}
+
+/* Улучшаем отображение заголовков */
+.message-bubble h1, .message-bubble h2, .message-bubble h3 {
+    margin-top: 24px;
+    margin-bottom: 16px;
+}
+
+/* Для выделения важных предупреждений */
+.message-bubble blockquote {
+    border-left: 4px solid #e74c3c;
+    padding-left: 15px;
+    margin: 15px 0;
+    background: rgba(231, 76, 60, 0.1);
+    padding: 10px 15px;
+    border-radius: 0 5px 5px 0;
+}
+
+/* Добавьте для выделения разделов РЭПТ */
+.message-bubble strong:contains("A (Активирующее событие)"),
+.message-bubble strong:contains("B (Убеждения)"),
+.message-bubble strong:contains("C (Последствия)"),
+.message-bubble strong:contains("D (Дискуссия)"),
+.message-bubble strong:contains("E (Эффективное мышление)") {
+    display: block;
+    margin-top: 16px;
+    margin-bottom: 8px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    color: #4a6fa5;
+}
